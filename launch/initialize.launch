@@ -1,0 +1,9 @@
+<launch>
+
+	<node name="spawn_robot_arm" pkg="gazebo_ros" type="spawn_model" args="-file $(find demo_test)/urdf/gripper_robot.urdf -urdf -model gripper_robot -y -2.0" />
+
+	<node name="spawn_conveyor_belt" pkg="gazebo_ros" type="spawn_model" args="-file $(find demo_test)/urdf/conveyor_belt.urdf -urdf -model conveyor_belt" />
+
+	<node name="spawn_frig" pkg="gazebo_ros" type="spawn_model" args="-file $(find demo_test)/urdf/cube.urdf -urdf -model cube" />
+
+</launch>
