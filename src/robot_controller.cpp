@@ -184,6 +184,7 @@ int main(int argc, char **argv) {
 	Joint joint2(nh, "joint2", dt);
 	Joint joint3(nh, "joint3", dt);
 	Joint joint4(nh, "joint4", dt);
+	Joint joint5(nh, "joint5", dt);
 
 
 	// set kpkv here with experience values after tuning them through service
@@ -199,6 +200,7 @@ int main(int argc, char **argv) {
 	joint2.kpkvSetting(50, 15);
 	joint3.kpkvSetting(30, 9);
 	joint4.kpkvSetting(30, 9);
+	joint5.kpkvSetting(30, 9);
 
 
 	ros::Rate rate_timer(1 / dt);
@@ -208,6 +210,7 @@ int main(int argc, char **argv) {
 		joint2.getJointState();
 		joint3.getJointState();
 		joint4.getJointState();
+		joint5.getJointState();
 
 
 		// calculate the torque for each joint and publish them
@@ -215,6 +218,7 @@ int main(int argc, char **argv) {
 		joint2.jointTrqControl();
 		joint3.jointTrqControl();
 		joint4.jointTrqControl();
+		joint5.getJointState();
 
 
 		ros::spinOnce(); // update pos_cmd, kpkv

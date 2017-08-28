@@ -29,14 +29,15 @@ void move_arm(std::vector<double> start_jnts,
 	trajectory_msgs::JointTrajectory trajectory;
 	trajectory_msgs::JointTrajectoryPoint trajectory_points;
 	// joint_names field
-	trajectory.joint_names.resize(4);
+	trajectory.joint_names.resize(5);
 	trajectory.joint_names[0] = "joint1";
 	trajectory.joint_names[1] = "joint2";
 	trajectory.joint_names[2] = "joint3";
 	trajectory.joint_names[3] = "joint4";
+	trajectory.joint_names[4] = "joint5";
 
 	// positions and velocities field
-	trajectory_points.positions.resize(4);
+	trajectory_points.positions.resize(5);
 
 	double fraction_of_range;
 	int time_5 = 5;
@@ -45,7 +46,7 @@ void move_arm(std::vector<double> start_jnts,
 	trajectory.points.clear();
 	for (int i=0; i<time_5+1; i++) { // there are time_5+1 points, including start and end
 		fraction_of_range = (double)i/time_5;
-		for (int j=0; j<4; j++) { // there are 4 joints
+		for (int j=0; j<5; j++) { // there are 5 joints
 			trajectory_points.positions[j] = start_jnts[j] + (end_jnts[j] - start_jnts[j])*fraction_of_range;
 		}
 		trajectory_points.time_from_start = ros::Duration((double)i);
@@ -82,14 +83,15 @@ int main(int argc, char** argv) {
 	trajectory_msgs::JointTrajectory trajectory;
 	trajectory_msgs::JointTrajectoryPoint trajectory_points;
 	// joint_names field
-	trajectory.joint_names.resize(4);
+	trajectory.joint_names.resize(5);
 	trajectory.joint_names[0] = "joint1";
 	trajectory.joint_names[1] = "joint2";
 	trajectory.joint_names[2] = "joint3";
 	trajectory.joint_names[3] = "joint4";
+	trajectory.joint_names[4] = "joint5";
 
 	// positions and velocities field
-	trajectory_points.positions.resize(4);
+	trajectory_points.positions.resize(5);
 
 	// initialize a service client to get joint positions
 	ros::ServiceClient get_jnt_state_client = nh.serviceClient<gazebo_msgs::GetJointProperties>(
@@ -112,8 +114,8 @@ int main(int argc, char** argv) {
 
 	// get the original joint positions when this node is invoked
 	std::vector<double> origin_jnts;
-	origin_jnts.resize(4);
-	for (int i=0; i<4; i++) {
+	origin_jnts.resize(5);
+	for (int i=0; i<5; i++) {
 		get_joint_state_srv_msg.request.joint_name = trajectory.joint_names[i];
 		get_jnt_state_client.call(get_joint_state_srv_msg);
 		origin_jnts[i] = get_joint_state_srv_msg.response.position[0];
@@ -128,6 +130,7 @@ int main(int argc, char** argv) {
 	safe_jnts[1] = 30.0/180.0*M_PI; // joint2, a little bit forward
 	safe_jnts[2] = 75.0/180.0*M_PI; // joint3, a little bit forward
 	safe_jnts[3] = M_PI/2 - safe_jnts[1] - safe_jnts[2]; // joint4, parallel to the ground
+	safe_jnts[4] = M_PI/2;
 
 	// assign the safe joints to end joints
 
@@ -154,6 +157,7 @@ int main(int argc, char** argv) {
 	safe1_jnts[1] = 120/180.0*M_PI; // joint2, a little bit forward
 	safe1_jnts[2] = -30/180.0*M_PI; // joint3, a little bit forward
 	safe1_jnts[3] = 0; // joint4, parallel to the ground
+	safe1_jnts[4] = 0;
 
 
 	move_arm(safe_jnts, safe1_jnts);
@@ -178,6 +182,7 @@ int main(int argc, char** argv) {
 	safe2_jnts[1] = 40.0/180.0*M_PI; // joint2, a little bit forward
 	safe2_jnts[2] = M_PI - safe2_jnts[1]; // joint3, a little bit forward
 	safe2_jnts[3] = 0; // joint4, parallel to the ground
+	safe2_jnts[4] = M_PI/2;
 
 
 	move_arm(safe1_jnts, safe2_jnts);
@@ -201,6 +206,7 @@ int main(int argc, char** argv) {
 	safe3_jnts[1] = 140.0/180.0*M_PI; // joint2, a little bit forward
 	safe3_jnts[2] = -10/180.0*M_PI; // joint3, a little bit forward
 	safe3_jnts[3] = M_PI - safe3_jnts[0]; // joint4, parallel to the ground
+	safe3_jnts[4] = 0;
 
 
 	move_arm(safe2_jnts, safe3_jnts);
@@ -256,6 +262,7 @@ int main(int argc, char** argv) {
 	origin0_jnts[1] = 40.0/180.0*M_PI; // joint2, a little bit forward
 	origin0_jnts[2] = 90.0/180.0*M_PI; // joint3, a little bit forward
 	origin0_jnts[3] = M_PI/2 - origin0_jnts[1] - origin0_jnts[2]; // joint4, parallel to the ground
+	origin0_jnts[4] = 0;
 
 	// assign the start joints and end joints
 

@@ -40,7 +40,7 @@
 
 <!-- link1 and its revolute joint1 relative to base_link -->
 <!-- rotating along z axis -->
-<joint name="joint1" type="revolute">
+<joint name="joint5" type="revolute">
   <parent link="base_link"/>
   <child link="link1"/>
   <origin xyz="0 0 0.25" rpy="0 0 0"/>
@@ -55,13 +55,6 @@
       <box size="1 1 0.2"/>
     </geometry>
   </collision>
-
-<!--   <visual>
-    <origin xyz="0 0 0.05" rpy="0 0 0"/>
-    <geometry>
-      <cylinder length="0.1" radius="1"/>
-    </geometry>
-  </visual> -->
 
   <visual>
     <origin xyz="0 0 0.1" rpy="0 0 0"/>
