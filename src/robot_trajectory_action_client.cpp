@@ -12,7 +12,6 @@
 
 // inverse kinematics function of the gripper robot
 
-
 // callback to get "result" message from action server
 void doneCb(const actionlib::SimpleClientGoalState& state,
 		const demo_test::trajResultConstPtr& result) {
@@ -246,7 +245,7 @@ int main(int argc, char** argv) {
 
 
 	/////////////////////////////////////////////
-	// 5.move back to the safe point
+	// 6.dock the robotic arm at the designated spot
 	/////////////////////////////////////////////
 
 	ROS_INFO("step 6: move back to the original position.");
