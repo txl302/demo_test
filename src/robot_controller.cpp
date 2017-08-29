@@ -205,7 +205,7 @@ int main(int argc, char **argv) {
 	joint2.kpkvSetting(50, 15);
 	joint3.kpkvSetting(30, 9);
 	joint4.kpkvSetting(30, 9);
-	joint5.kpkvSetting(1, 100);
+	joint5.kpkvSetting(50, 15);
 
 
 	ros::Rate rate_timer(1 / dt);

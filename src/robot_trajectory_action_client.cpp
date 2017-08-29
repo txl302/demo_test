@@ -126,10 +126,10 @@ int main(int argc, char** argv) {
 	// define the safe point, avoid singularity at origin
 	std::vector<double> safe_jnts;
 	safe_jnts.resize(6);
-	safe_jnts[0] = M_PI/2; // joint1, at its origin
-	safe_jnts[1] = 30.0/180.0*M_PI; // joint2, a little bit forward
-	safe_jnts[2] = 75.0/180.0*M_PI; // joint3, a little bit forward
-	safe_jnts[3] = M_PI/2 - safe_jnts[1] - safe_jnts[2]; // joint4, parallel to the ground
+	safe_jnts[0] = 0; // joint1, at its origin
+	safe_jnts[1] = 150/180.0*M_PI; // joint2, a little bit forward
+	safe_jnts[2] = -60/180.0*M_PI; // joint3, a little bit forward
+	safe_jnts[3] = 0; // joint4, parallel to the ground
 	safe_jnts[4] = 0;
 
 	// assign the safe joints to end joints
@@ -167,21 +167,20 @@ int main(int argc, char** argv) {
 	// if here, task 5 is finished successfully
 	ros::Duration(time_delay).sleep(); // delay before jumping to next task
 
-
 	//////////////////////////////////////
-	// 2.move to the top surface
+	// 2.move to the side surface
 	//////////////////////////////////////
 
-	ROS_INFO("step 2: move to the top surface");
+	ROS_INFO("step 2: move to the side surface");
 
 
 
 	std::vector<double> safe2_jnts;
 	safe2_jnts.resize(6);
-	safe2_jnts[0] = M_PI/2; // joint1, at its origin
-	safe2_jnts[1] = 80.0/180.0*M_PI; // joint2, a little bit forward
-	safe2_jnts[2] = M_PI - safe2_jnts[1]; // joint3, a little bit forward
-	safe2_jnts[3] = 0; // joint4, parallel to the ground
+	safe2_jnts[0] = M_PI/4; // joint1, at its origin
+	safe2_jnts[1] = 120.0/180.0*M_PI; // joint2, a little bit forward
+	safe2_jnts[2] = -30/180.0*M_PI; // joint3, a little bit forward
+	safe2_jnts[3] = safe2_jnts[0] - M_PI; // joint4, parallel to the ground
 	safe2_jnts[4] = 0;
 
 
@@ -189,23 +188,25 @@ int main(int argc, char** argv) {
 
 	ROS_INFO("step 2 is done.");
 
+
 	// if here, task 5 is finished successfully
 	ros::Duration(time_delay).sleep(); // delay before jumping to next task
 
+
 	//////////////////////////////////////
-	// 3.move to the side surface
+	// 3.move to the top surface
 	//////////////////////////////////////
 
-	ROS_INFO("step 3: move to the side surface");
+	ROS_INFO("step 3: move to the top surface");
 
 
 
 	std::vector<double> safe3_jnts;
 	safe3_jnts.resize(6);
-	safe3_jnts[0] = M_PI/4; // joint1, at its origin
-	safe3_jnts[1] = 120.0/180.0*M_PI; // joint2, a little bit forward
-	safe3_jnts[2] = -30/180.0*M_PI; // joint3, a little bit forward
-	safe3_jnts[3] = safe3_jnts[0] - M_PI; // joint4, parallel to the ground
+	safe3_jnts[0] = M_PI/2; // joint1, at its origin
+	safe3_jnts[1] = 80.0/180.0*M_PI; // joint2, a little bit forward
+	safe3_jnts[2] = M_PI - safe3_jnts[1]; // joint3, a little bit forward
+	safe3_jnts[3] = 0; // joint4, parallel to the ground
 	safe3_jnts[4] = 0;
 
 
@@ -213,15 +214,14 @@ int main(int argc, char** argv) {
 
 	ROS_INFO("step 3 is done.");
 
-
 	// if here, task 5 is finished successfully
 	ros::Duration(time_delay).sleep(); // delay before jumping to next task
 
 	//////////////////////////////////////
-	// 4.rotate the object
+	// 4.move to the side surface
 	//////////////////////////////////////
 
-	ROS_INFO("step 4: rotate the object");
+	ROS_INFO("step 4: move to the side surface");
 
 
 
@@ -230,8 +230,8 @@ int main(int argc, char** argv) {
 	safe4_jnts[0] = M_PI/4; // joint1, at its origin
 	safe4_jnts[1] = 120.0/180.0*M_PI; // joint2, a little bit forward
 	safe4_jnts[2] = -30/180.0*M_PI; // joint3, a little bit forward
-	safe4_jnts[3] = safe3_jnts[0] - M_PI; // joint4, parallel to the ground
-	safe4_jnts[4] = M_PI;
+	safe4_jnts[3] = safe4_jnts[0] - M_PI; // joint4, parallel to the ground
+	safe4_jnts[4] = M_PI/2;
 
 
 	move_arm(safe3_jnts, safe4_jnts);
@@ -243,12 +243,20 @@ int main(int argc, char** argv) {
 	ros::Duration(time_delay).sleep(); // delay before jumping to next task
 
 	//////////////////////////////////////
-	// 5.move the gripper up with the beer
+	// 5.move to the front sruface
 	//////////////////////////////////////
 
 	ROS_INFO("step 5: move to the front surface");
 
-	move_arm(safe4_jnts, safe1_jnts);
+	std::vector<double> safe5_jnts;
+	safe5_jnts.resize(6);
+	safe5_jnts[0] = M_PI/2; // joint1, at its origin
+	safe5_jnts[1] = 150/180.0*M_PI; // joint2, a little bit forward
+	safe5_jnts[2] = -60/180.0*M_PI; // joint3, a little bit forward
+	safe5_jnts[3] = 0; // joint4, parallel to the ground
+	safe5_jnts[4] = M_PI/2;
+
+	move_arm(safe4_jnts, safe5_jnts);
 
 	ROS_INFO("step 5 is done.");
 
@@ -266,7 +274,7 @@ int main(int argc, char** argv) {
 
 	// assign the start joints and end joints
 
-	move_arm(safe1_jnts, safe_jnts);
+	move_arm(safe5_jnts, safe_jnts);
 
 
 	ROS_INFO("step 6 is done.");
