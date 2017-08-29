@@ -103,7 +103,7 @@ int main(int argc, char** argv) {
 	gazebo_msgs::GetModelState get_model_state_srv_msg;
 
 
-	double time_delay = 5.0; // delay between every task
+	double time_delay = 10.0; // delay between every task
 
 
 	///////////////////////////////////////
@@ -130,7 +130,7 @@ int main(int argc, char** argv) {
 	safe_jnts[1] = 30.0/180.0*M_PI; // joint2, a little bit forward
 	safe_jnts[2] = 75.0/180.0*M_PI; // joint3, a little bit forward
 	safe_jnts[3] = M_PI/2 - safe_jnts[1] - safe_jnts[2]; // joint4, parallel to the ground
-	safe_jnts[4] = M_PI/2;
+	safe_jnts[4] = 0;
 
 	// assign the safe joints to end joints
 
@@ -154,8 +154,8 @@ int main(int argc, char** argv) {
 	std::vector<double> safe1_jnts;
 	safe1_jnts.resize(6);
 	safe1_jnts[0] = M_PI/2; // joint1, at its origin
-	safe1_jnts[1] = 120/180.0*M_PI; // joint2, a little bit forward
-	safe1_jnts[2] = -30/180.0*M_PI; // joint3, a little bit forward
+	safe1_jnts[1] = 150/180.0*M_PI; // joint2, a little bit forward
+	safe1_jnts[2] = -60/180.0*M_PI; // joint3, a little bit forward
 	safe1_jnts[3] = 0; // joint4, parallel to the ground
 	safe1_jnts[4] = 0;
 
@@ -179,10 +179,10 @@ int main(int argc, char** argv) {
 	std::vector<double> safe2_jnts;
 	safe2_jnts.resize(6);
 	safe2_jnts[0] = M_PI/2; // joint1, at its origin
-	safe2_jnts[1] = 40.0/180.0*M_PI; // joint2, a little bit forward
+	safe2_jnts[1] = 80.0/180.0*M_PI; // joint2, a little bit forward
 	safe2_jnts[2] = M_PI - safe2_jnts[1]; // joint3, a little bit forward
 	safe2_jnts[3] = 0; // joint4, parallel to the ground
-	safe2_jnts[4] = M_PI/2;
+	safe2_jnts[4] = 0;
 
 
 	move_arm(safe1_jnts, safe2_jnts);
@@ -193,7 +193,7 @@ int main(int argc, char** argv) {
 	ros::Duration(time_delay).sleep(); // delay before jumping to next task
 
 	//////////////////////////////////////
-	// 3.move the gripper up with the beer
+	// 3.move to the side surface
 	//////////////////////////////////////
 
 	ROS_INFO("step 3: move to the side surface");
@@ -203,9 +203,9 @@ int main(int argc, char** argv) {
 	std::vector<double> safe3_jnts;
 	safe3_jnts.resize(6);
 	safe3_jnts[0] = M_PI/4; // joint1, at its origin
-	safe3_jnts[1] = 140.0/180.0*M_PI; // joint2, a little bit forward
-	safe3_jnts[2] = -10/180.0*M_PI; // joint3, a little bit forward
-	safe3_jnts[3] = M_PI - safe3_jnts[0]; // joint4, parallel to the ground
+	safe3_jnts[1] = 120.0/180.0*M_PI; // joint2, a little bit forward
+	safe3_jnts[2] = -30/180.0*M_PI; // joint3, a little bit forward
+	safe3_jnts[3] = safe3_jnts[0] - M_PI; // joint4, parallel to the ground
 	safe3_jnts[4] = 0;
 
 
@@ -218,14 +218,39 @@ int main(int argc, char** argv) {
 	ros::Duration(time_delay).sleep(); // delay before jumping to next task
 
 	//////////////////////////////////////
-	// 3.move the gripper up with the beer
+	// 4.rotate the object
 	//////////////////////////////////////
 
-	ROS_INFO("step 4: move to the front surface");
+	ROS_INFO("step 4: rotate the object");
 
-	move_arm(safe3_jnts, safe1_jnts);
+
+
+	std::vector<double> safe4_jnts;
+	safe4_jnts.resize(6);
+	safe4_jnts[0] = M_PI/4; // joint1, at its origin
+	safe4_jnts[1] = 120.0/180.0*M_PI; // joint2, a little bit forward
+	safe4_jnts[2] = -30/180.0*M_PI; // joint3, a little bit forward
+	safe4_jnts[3] = safe3_jnts[0] - M_PI; // joint4, parallel to the ground
+	safe4_jnts[4] = M_PI;
+
+
+	move_arm(safe3_jnts, safe4_jnts);
 
 	ROS_INFO("step 4 is done.");
+
+
+	// if here, task 5 is finished successfully
+	ros::Duration(time_delay).sleep(); // delay before jumping to next task
+
+	//////////////////////////////////////
+	// 5.move the gripper up with the beer
+	//////////////////////////////////////
+
+	ROS_INFO("step 5: move to the front surface");
+
+	move_arm(safe4_jnts, safe1_jnts);
+
+	ROS_INFO("step 5 is done.");
 
 
 	// if here, task 5 is finished successfully
@@ -234,39 +259,14 @@ int main(int argc, char** argv) {
 
 
 	/////////////////////////////////////////////
-	// 5.move back to the safe point
+	// 6.move back to the safe point
 	/////////////////////////////////////////////
 
-	ROS_INFO("step 5: move back to the safe position.");
+	ROS_INFO("step 6: move back to the safe position.");
 
 	// assign the start joints and end joints
 
 	move_arm(safe1_jnts, safe_jnts);
-
-
-	ROS_INFO("step 5 is done.");
-	
-	// if here, task 10 is finished successfully
-	ros::Duration(time_delay).sleep(); // delay before jumping to next task
-
-
-	/////////////////////////////////////////////
-	// 6.dock the robotic arm at the designated spot
-	/////////////////////////////////////////////
-
-	ROS_INFO("step 6: move back to the original position.");
-
-	std::vector<double> origin0_jnts;
-	origin0_jnts.resize(6);
-	origin0_jnts[0] = 0; // joint1, at its origin
-	origin0_jnts[1] = 40.0/180.0*M_PI; // joint2, a little bit forward
-	origin0_jnts[2] = 90.0/180.0*M_PI; // joint3, a little bit forward
-	origin0_jnts[3] = M_PI/2 - origin0_jnts[1] - origin0_jnts[2]; // joint4, parallel to the ground
-	origin0_jnts[4] = 0;
-
-	// assign the start joints and end joints
-
-	move_arm(safe_jnts, origin0_jnts);
 
 
 	ROS_INFO("step 6 is done.");
@@ -274,7 +274,32 @@ int main(int argc, char** argv) {
 	// if here, task 10 is finished successfully
 	ros::Duration(time_delay).sleep(); // delay before jumping to next task
 
-	ROS_INFO(" task is finished! Thank you for watching");
+
+	/////////////////////////////////////////////
+	// 7.dock the robotic arm at the designated spot
+	/////////////////////////////////////////////
+
+	ROS_INFO("step 7: move back to the original position.");
+
+	std::vector<double> origin0_jnts;
+	origin0_jnts.resize(6);
+	origin0_jnts[0] = 0; // joint1, at its origin
+	origin0_jnts[1] = 40.0/180.0*M_PI; // joint2, a little bit forward
+	origin0_jnts[2] = 90.0/180.0*M_PI; // joint3, a little bit forward
+	origin0_jnts[3] = 0; // joint4, parallel to the ground
+	origin0_jnts[4] = 0;
+
+	// assign the start joints and end joints
+
+	move_arm(safe_jnts, origin0_jnts);
+
+
+	ROS_INFO("step 7 is done.");
+	
+	// if here, task 10 is finished successfully
+	ros::Duration(time_delay).sleep(); // delay before jumping to next task
+
+	ROS_INFO("Task is finished! Thank you for watching");
 
 	return 0;
 }
