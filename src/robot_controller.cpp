@@ -104,7 +104,9 @@ void Joint::getJointState() {
 	// get joint state
 	get_jnt_state_client.call(get_joint_state_srv_msg);
 	// publish joint position
+
 	pos_cur = get_joint_state_srv_msg.response.position[0];
+
 	pos_msg.data = pos_cur;
 	pos_publisher.publish(pos_msg);
 	// publish joint velocity
@@ -112,6 +114,7 @@ void Joint::getJointState() {
 	vel_msg.data = vel_cur;
 	vel_publisher.publish(vel_msg);
 	// publish joint_state_msg
+	
 	joint_state_msg.header.stamp = ros::Time::now();
 	joint_state_msg.position[0] = pos_cur;
 	joint_state_msg.velocity[0] = vel_cur;
@@ -186,6 +189,8 @@ int main(int argc, char **argv) {
 	Joint joint4(nh, "joint4", dt);
 	Joint joint5(nh, "joint5", dt);
 
+	//Joint joint5(nh, "rotational_platform::joint5", dt);
+
 
 	// set kpkv here with experience values after tuning them through service
 	// with gravity -9.8
@@ -204,6 +209,7 @@ int main(int argc, char **argv) {
 
 
 	ros::Rate rate_timer(1 / dt);
+
 	while(ros::ok()) {
 		// get joint state(pos, vel) and publish them
 		joint1.getJointState();
@@ -212,13 +218,15 @@ int main(int argc, char **argv) {
 		joint4.getJointState();
 		joint5.getJointState();
 
+		
+
 
 		// calculate the torque for each joint and publish them
 		joint1.jointTrqControl();
 		joint2.jointTrqControl();
 		joint3.jointTrqControl();
 		joint4.jointTrqControl();
-		joint5.getJointState();
+		joint5.jointTrqControl();
 
 
 		ros::spinOnce(); // update pos_cmd, kpkv

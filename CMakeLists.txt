@@ -6,17 +6,10 @@ find_package(catkin_simple REQUIRED)
 
 catkin_simple()
 
-
 cs_add_executable(robot_controller src/robot_controller.cpp)
 cs_add_executable(robot_kpkv_serviceClient src/kpkv_serviceClient.cpp)
 cs_add_executable(robot_trajectory_action_server src/robot_trajectory_action_server.cpp)
 cs_add_executable(robot_trajectory_action_client src/robot_trajectory_action_client.cpp)
-
-cs_add_executable(platform_controller src/platform_controller.cpp)
-cs_add_executable(platform_kpkv_serviceClient src/kpkv_serviceClient.cpp)
-cs_add_executable(platform_trajectory_action_server src/platform_trajectory_action_server.cpp)
-cs_add_executable(platform_trajectory_action_client src/platform_trajectory_action_client.cpp)
-
 
 cs_install()
 cs_export()
