@@ -15,21 +15,21 @@
 
 <link name="base_link">
 	<collision>
-		<origin xyz="0 0 0.75" rpy="0 0 0"/>
+		<origin xyz="0 0 0.7" rpy="0 0 0"/>
 		<geometry>
-			<box size="0.2 0.2 1.5"/>
+			<box size="0.2 0.2 1.4"/>
 		</geometry>
 	</collision>
 
 	<visual>
-		<origin xyz="0 0 0.75" rpy="0 0 0"/>
+		<origin xyz="0 0 0.7" rpy="0 0 0"/>
 		<geometry>
-			<box size="0.2 0.2 1.8"/>
+			<box size="0.2 0.2 1.6"/>
 		</geometry>
 	</visual>
 
 	<inertial>
-		<origin xyz="0 0 0.75" rpy="0 0 0"/>
+		<origin xyz="0 0 0.7" rpy="0 0 0"/>
 		<mass value="1"/>
 		<inertia
 			ixx="1.0" ixy="0.0" ixz="0.0"
@@ -45,21 +45,21 @@
 	<child link="link1"/>
 	<origin xyz="0 0 1.5" rpy="0 0 0"/>
 	<axis xyz="0 0 1"/>
-	<limit effort="100" velocity="100" lower="-1.5708" upper="1.5708"/>
+	<limit effort="100" velocity="100" lower="0" upper="3.1416"/>
 </joint>
 
 <link name="link1">
 	<collision>
 		<origin xyz="0 0 0.05" rpy="0 0 0"/>
 		<geometry>
-			<cylinder length="0.1" radius="0.1"/>
+			<cylinder length="0.1" radius="0.09"/>
 		</geometry>
 	</collision>
 
 	<visual>
 		<origin xyz="0 0 0.05" rpy="0 0 0"/>
 		<geometry>
-			<cylinder length="0.1" radius="0.1"/>
+			<cylinder length="0.1" radius="0.09"/>
 		</geometry>
 	</visual>
 
@@ -91,14 +91,14 @@
 	<collision>
 		<origin xyz="0 0 0.6" rpy="0 0 0"/>
 		<geometry>
-			<cylinder length="1.1" radius="0.09"/>
+			<cylinder length="1.1" radius="0.07"/>
 		</geometry>
 	</collision>
 
 	<visual>
 		<origin xyz="0 0 0.6" rpy="0 0 0"/>
 		<geometry>
-			<cylinder length="1.2" radius="0.09"/>
+			<cylinder length="1.2" radius="0.07"/>
 		</geometry>
 	</visual>
 
@@ -130,14 +130,14 @@
 	<collision>
 		<origin xyz="0 0 0.15" rpy="0 0 0"/>
 		<geometry>
-			<cylinder length="0.3" radius="0.07"/>
+			<cylinder length="0.3" radius="0.04"/>
 		</geometry>
 	</collision>
 
 	<visual>
 		<origin xyz="0 0 0.15" rpy="0 0 0"/>
 		<geometry>
-			<cylinder length="0.3" radius="0.07"/>
+			<cylinder length="0.3" radius="0.04"/>
 		</geometry>
 	</visual>
 
@@ -169,14 +169,14 @@
 	<collision>
 		<origin xyz="0 0 0.06" rpy="0 0 0"/>
 		<geometry>
-			<cylinder length="0.12" radius="0.05"/>
+			<cylinder length="0.12" radius="0.025"/>
 		</geometry>
 	</collision>
 
 	<visual>
 		<origin xyz="0 0 0.06" rpy="0 0 0"/>
 		<geometry>
-			<cylinder length="0.12" radius="0.05"/>
+			<cylinder length="0.12" radius="0.025"/>
 		</geometry>
 	</visual>
 
@@ -239,16 +239,16 @@
 <link name="link1_p">
   <collision>
     <origin xyz="0 0 0" rpy="0 0 0"/>
-    <geometry>
-      <box size="1 1 0.1"/>
-    </geometry>
+	<geometry>
+		<cylinder length="0.1" radius="0.75"/>
+	</geometry>
   </collision>
 
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
-    <geometry>
-      <box size="1 1 0.1"/>
-    </geometry>
+	<geometry>
+		<cylinder length="0.1" radius="0.75"/>
+	</geometry>
   </visual>
 
   <inertial>
@@ -274,14 +274,14 @@
   <collision>
     <origin xyz="0 0 0.3" rpy="0 0 0"/>
     <geometry>
-      <box size="0.5 0.5 0.5"/>
+      <box size="0.45 0.36 0.78"/>
     </geometry>
   </collision>
 
   <visual>
     <origin xyz="0 0 0.3" rpy="0 0 0"/>
     <geometry>
-      <box size="0.5 0.5 0.5"/>
+      <box size="0.45 0.36 0.78"/>
     </geometry>
   </visual>
 
