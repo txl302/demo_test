@@ -192,6 +192,7 @@ int main(int argc, char** argv) {
 
 	ros::Duration(time_delay).sleep(); // delay before jumping to next task
 
+	std::cin.get();
 	
 	//////////////////////////////////////
 	// 1.move to right front of the object
@@ -203,6 +204,8 @@ int main(int argc, char** argv) {
 
 	ros::Duration(time_delay).sleep(); // delay before jumping to next task
 
+	std::cin.get();
+
 	//////////////////////////////////////
 	// 2.move to left front of the object
 	//////////////////////////////////////
@@ -213,6 +216,7 @@ int main(int argc, char** argv) {
 
 	ros::Duration(time_delay).sleep(); // delay before jumping to next task
 
+	std::cin.get();
 
 	//////////////////////////////////////
 	// 3.rotate the platform
@@ -224,6 +228,8 @@ int main(int argc, char** argv) {
 
 	ros::Duration(time_delay).sleep(); // delay before jumping to next task
 
+	std::cin.get();
+
 	//////////////////////////////////////
 	// 4.move back to right front of the object
 	//////////////////////////////////////
@@ -234,12 +240,13 @@ int main(int argc, char** argv) {
 
 	ros::Duration(time_delay).sleep(); // delay before jumping to next task
 
+	std::cin.get();
+
 	//////////////////////////////////////
 	// 5.move back to the safe pose
 	//////////////////////////////////////
 
 	ROS_INFO("step 5: move back to the safe pose");
-
 
 	move_arm(pos4_jnts, safe0_jnts);
 
