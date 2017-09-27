@@ -1,5 +1,5 @@
 <launch>
 
-	<node name="spawn_robot_arm" pkg="gazebo_ros" type="spawn_model" args="-file $(find demo_test)/urdf/robot_arm.urdf -urdf -model robot_arm -y -2.5" />
+	<node name="spawn_robot_arm" pkg="gazebo_ros" type="spawn_model" args="-file $(find demo_test)/urdf/demo.urdf -urdf -model robot_arm -y -2.5" />
 
 </launch>
