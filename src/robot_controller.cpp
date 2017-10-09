@@ -10,7 +10,7 @@
 #include <gazebo_msgs/ApplyJointEffort.h>
 #include <gazebo_msgs/GetJointProperties.h>
 #include <sensor_msgs/JointState.h>
-#include <ps5_yxl1450/kpkv_msg.h>
+#include <demo_test/kpkv_msg.h>
 
 // define class to instantiate two joints
 class Joint {
@@ -24,7 +24,7 @@ private:
 	// callback for the pos_cmd subscriber
 	void posCmdCB(const std_msgs::Float64& pos_cmd_msg);
 	// callback for kpkv service server
-	bool kpkvCallback(ps5_yxl1450::kpkv_msgRequest& request, ps5_yxl1450::kpkv_msgResponse& response);
+	bool kpkvCallback(demo_test::kpkv_msgRequest& request, demo_test::kpkv_msgResponse& response);
 	// service clients
 	ros::ServiceClient get_jnt_state_client;
 	ros::ServiceClient set_trq_client;
@@ -148,7 +148,7 @@ void Joint::kpkvSetting(double kp, double kv) {
 	this -> kv = kv;
 }
 
-bool Joint::kpkvCallback(ps5_yxl1450::kpkv_msgRequest& request, ps5_yxl1450::kpkv_msgResponse& response) {
+bool Joint::kpkvCallback(demo_test::kpkv_msgRequest& request, demo_test::kpkv_msgResponse& response) {
 	ROS_INFO("kpkvCallback activated");
 	kp = request.kp;
 	kv = request.kv;

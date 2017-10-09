@@ -7,7 +7,7 @@
 
 #include <ros/ros.h>
 #include <actionlib/server/simple_action_server.h>
-#include <ps5_yxl1450/trajAction.h>
+#include <demo_test/trajAction.h>
 #include <std_msgs/Float64.h>
 #include <vector>
 #include <string>
@@ -23,17 +23,17 @@ public:
 	~TrajectoryActionServer(void) {}
 private:
 	void send_joint_commands_(std::vector<double> cmd_jnts);
-	void executeCB(const actionlib::SimpleActionServer<ps5_yxl1450::trajAction>::GoalConstPtr& goal);
+	void executeCB(const actionlib::SimpleActionServer<demo_test::trajAction>::GoalConstPtr& goal);
 
 	ros::NodeHandle nh_; // a nodehandle is needed
 	// each joint in the robot needs a pos_cmd_publisher
 	std::vector<ros::Publisher> pos_cmd_publisher_;  // initialization will be in executeCB()
-	actionlib::SimpleActionServer<ps5_yxl1450::trajAction> as_;
+	actionlib::SimpleActionServer<demo_test::trajAction> as_;
 
 	// message types for the action
-	ps5_yxl1450::trajActionGoal goal_; // goal message
-	ps5_yxl1450::trajActionResult result_; // result message
-	ps5_yxl1450::trajActionFeedback feedback_; // feedback message, not used
+	demo_test::trajActionGoal goal_; // goal message
+	demo_test::trajActionResult result_; // result message
+	demo_test::trajActionFeedback feedback_; // feedback message, not used
 
 };
 
@@ -61,7 +61,7 @@ void TrajectoryActionServer::send_joint_commands_(std::vector<double> cmd_jnts) 
 }
 
 // substantial work will be done here
-void TrajectoryActionServer::executeCB(const actionlib::SimpleActionServer<ps5_yxl1450::trajAction>::GoalConstPtr& goal) {
+void TrajectoryActionServer::executeCB(const actionlib::SimpleActionServer<demo_test::trajAction>::GoalConstPtr& goal) {
 	ROS_INFO("in executecb...");
 	// avoid using "goal->trajectory" too much
 	trajectory_msgs::JointTrajectory trajectory = goal -> trajectory;

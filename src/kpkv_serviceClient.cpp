@@ -4,7 +4,7 @@
 	// in here, there are one service for each joints
 
 #include <ros/ros.h>
-#include <ps5_yxl1450/kpkv_msg.h>
+#include <demo_test/kpkv_msg.h>
 #include <string>
 #include <iostream>
 
@@ -12,7 +12,7 @@ int main(int argc, char **argv) {
 	ros::init(argc, argv, "kpkv_serviceClient");
 	ros::NodeHandle nh;
 	ros::ServiceClient client;
-	ps5_yxl1450::kpkv_msg srv;
+	demo_test::kpkv_msg srv;
 	// cin variables
 	std::string in_joint_name;
 	double in_kp, in_kv;
@@ -24,7 +24,7 @@ int main(int argc, char **argv) {
 		std::cin >> in_joint_name;
 		if (in_joint_name.compare("x") == 0)
 			return 0;
-		client = nh.serviceClient<ps5_yxl1450::kpkv_msg>(in_joint_name + "_kpkv_service");
+		client = nh.serviceClient<demo_test::kpkv_msg>(in_joint_name + "_kpkv_service");
 		// get the value of kp and kv
 		std::cout << "enter the value of kp: ";
 		std::cin >> in_kp;
