@@ -154,8 +154,7 @@
     <limit effort="100" velocity="100" lower="0" upper="3.1416"/>
   </joint>
 
-  <link
-    name="link3">
+  <link name="link3">
     <inertial>
       <origin
         xyz="0.0261839079462923 2.09127868133763E-05 -0.185012067507171"
@@ -199,7 +198,7 @@
     name="joint3"
     type="revolute">
     <origin
-      xyz="0 0.84737046476322 0"
+      xyz="0 1.13860941000177 0"
       rpy="0 0 0" />
     <parent
       link="link2" />
@@ -208,6 +207,47 @@
     <axis
       xyz="1 0 0" />
     <limit effort="100" velocity="100" lower="0" upper="3.1416"/>
+  </joint>
+
+  <link
+    name="link5">
+    <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.844952599159698" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://demo_test/meshes/link5.STL" />
+      </geometry>
+    </visual>
+  </link>
+
+  <joint
+    name="joint5"
+    type="continuous">
+    <origin
+      xyz="0.0483407685108505 0 -0.693420367397096"
+      rpy="0 0 0" />
+    <parent
+      link="link3" />
+    <child
+      link="link5" />
+    <axis
+      xyz="0 1 0" />
   </joint>
 
   <link
@@ -240,25 +280,16 @@
           rgba="0.909803921568627 0.443137254901961 0.0313725490196078 1" />
       </material>
     </visual>
-    <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://demo_test/meshes/link4.STL" />
-      </geometry>
-    </collision>
   </link>
 
   <joint
     name="joint4"
     type="revolute">
     <origin
-      xyz="0.0383407685108506 0 -0.603280829801762"
-      rpy="0 0 -1.5707963267949" />
+      xyz="0.0383407685108506 0 0"
+      rpy="0 0 0" />
     <parent
-      link="link3" />
+      link="link5" />
     <child
       link="link4" />
     <axis
@@ -266,7 +297,7 @@
     <limit effort="100" velocity="100" lower="0" upper="3.1416"/>
   </joint>
 
-  <link
+<!--   <link
     name="base_rot">
     <inertial>
       <origin
@@ -386,6 +417,6 @@
   </gazebo>
   <gazebo reference="link4">
     <material>Gazebo/Red</material>
-  </gazebo>
+  </gazebo> -->
 
 </robot>

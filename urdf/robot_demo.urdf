@@ -199,6 +199,7 @@
     <axis
       xyz="1 0 0" />
   </joint>
+  
   <link
     name="link5">
     <inertial>
