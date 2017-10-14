@@ -34,15 +34,6 @@
           filename="package://demo_test/meshes/base_link.STL" />
       </geometry>
     </visual>
-    <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://demo_test/meshes/base_link.STL" />
-      </geometry>
-    </collision>
   </link>
 
   <link name="link1">
@@ -68,21 +59,7 @@
         <mesh
           filename="package://demo_test/meshes/link1.STL" />
       </geometry>
-      <material
-        name="">
-        <color
-          rgba="0.780392156862745 0.76078431372549 0.741176470588235 1" />
-      </material>
     </visual>
-    <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://demo_test/meshes/link1.STL" />
-      </geometry>
-    </collision>
   </link>
 
   <joint name="joint1" type="revolute">
@@ -122,21 +99,7 @@
         <mesh
           filename="package://demo_test/meshes/link2.STL" />
       </geometry>
-      <material
-        name="">
-        <color
-          rgba="0.909803921568627 0.443137254901961 0.0313725490196078 1" />
-      </material>
     </visual>
-    <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://demo_test/meshes/link2.STL" />
-      </geometry>
-    </collision>
   </link>
 
   <joint
@@ -183,15 +146,6 @@
           rgba="0.909803921568627 0.443137254901961 0.0313725490196078 1" />
       </material>
     </visual>
-    <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://demo_test/meshes/link3.STL" />
-      </geometry>
-    </collision>
   </link>
 
   <joint
@@ -274,11 +228,6 @@
         <mesh
           filename="package://demo_test/meshes/link4.STL" />
       </geometry>
-      <material
-        name="">
-        <color
-          rgba="0.909803921568627 0.443137254901961 0.0313725490196078 1" />
-      </material>
     </visual>
   </link>
 
@@ -295,6 +244,46 @@
     <axis
       xyz="-1 0 0" />
     <limit effort="100" velocity="100" lower="0" upper="3.1416"/>
+  </joint>
+
+  <link name="camera">
+    <inertial>
+      <origin
+        xyz="0 2.22044604925031E-16 -0.0681881207360688"
+        rpy="0 0 0" />
+      <mass
+        value="0.430020999525805" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_demo/meshes/camera.STL" />
+      </geometry>
+    </visual>
+  </link>
+
+  <joint
+    name="joint_camera"
+    type="fixed">
+    <origin
+      xyz="0 0 -0.18"
+      rpy="0 0 0" />
+    <parent
+      link="link4" />
+    <child
+      link="camera" />
+    <axis
+      xyz="0 0 0" />
   </joint>
 
 <!--   <link
@@ -401,7 +390,7 @@
     <axis
       xyz="0 1 0" />
     <limit effort="100" velocity="100" lower="0" upper="3.1416"/>
-  </joint>
+  </joint> -->
 
   <gazebo reference="base_link">
     <material>Gazebo/Black</material>
@@ -417,6 +406,6 @@
   </gazebo>
   <gazebo reference="link4">
     <material>Gazebo/Red</material>
-  </gazebo> -->
+  </gazebo>
 
 </robot>
