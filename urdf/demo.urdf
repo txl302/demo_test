@@ -33,11 +33,6 @@
         <mesh
           filename="package://demo_test/meshes/base_link.STL" />
       </geometry>
-      <material
-        name="">
-        <color
-          rgba="0.780392156862745 0.76078431372549 0.741176470588235 1" />
-      </material>
     </visual>
     <collision>
       <origin
@@ -50,8 +45,7 @@
     </collision>
   </link>
 
-  <link
-    name="link1">
+  <link name="link1">
     <inertial>
       <origin
         xyz="1.68454688663544E-07 0.164275740780367 -0.0669943121573495"
@@ -93,7 +87,7 @@
 
   <joint name="joint1" type="revolute">
     <origin
-      xyz="0 -1.5 0.11"
+      xyz="0 0 0.11"
       rpy="1.5707963267949 0 0" />
     <parent
       link="base_link" />
