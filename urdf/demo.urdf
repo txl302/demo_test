@@ -235,7 +235,7 @@
     name="joint4"
     type="revolute">
     <origin
-      xyz="0.0383407685108506 0 0"
+      xyz="0 0 0"
       rpy="0 0 0" />
     <parent
       link="link5" />
@@ -267,14 +267,14 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://robot_demo/meshes/camera.STL" />
+          filename="package://demo_test/meshes/camera.STL" />
       </geometry>
     </visual>
   </link>
 
   <joint
     name="joint_camera"
-    type="fixed">
+    type="revolute">
     <origin
       xyz="0 0 -0.18"
       rpy="0 0 0" />
@@ -284,113 +284,113 @@
       link="camera" />
     <axis
       xyz="0 0 0" />
-  </joint>
-
-<!--   <link
-    name="base_rot">
-    <inertial>
-      <origin
-        xyz="-8.07968910776367E-17 0.0692439571660551 0"
-        rpy="0 0 0" />
-      <mass
-        value="86.0893233455533" />
-      <inertia
-        ixx="0"
-        ixy="0"
-        ixz="0"
-        iyy="0"
-        iyz="0"
-        izz="0" />
-    </inertial>
-    <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://demo_test/meshes/base_rot.STL" />
-      </geometry>
-      <material
-        name="">
-        <color
-          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
-      </material>
-    </visual>
-    <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://demo_test/meshes/base_rot.STL" />
-      </geometry>
-    </collision>
-  </link>
-
-  <joint name="joint_p" type="fixed">
-    <origin
-      xyz="0 1 0"
-      rpy="1.5707963267949 0 0" />
-    <parent link="world" />
-    <child link="base_rot" />
-    <axis xyz="0 1 0" />
-  </joint>
-
-  <link
-    name="plate">
-    <inertial>
-      <origin
-        xyz="-0.00282405785286387 0.909404586795398 -0.00501013645545489"
-        rpy="0 0 0" />
-      <mass
-        value="1357.29950396653" />
-      <inertia
-        ixx="91.1270275287042"
-        ixy="0.299439001894805"
-        ixz="-0.00174566238373518"
-        iyy="0.00408093994816595"
-        iyz="0.531232126869081"
-        izz="91.1249145397717" />
-    </inertial>
-    <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://demo_test/meshes/plate.STL" />
-      </geometry>
-      <material
-        name="">
-        <color
-          rgba="0 0 0 1" />
-      </material>
-    </visual>
-    <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://demo_test/meshes/plate.STL" />
-      </geometry>
-    </collision>
-  </link>
-
-  <joint
-    name="joint5"
-    type="revolute">
-    <origin
-      xyz="0 0.15 0"
-      rpy="0 0 0" />
-    <parent
-      link="base_rot" />
-    <child
-      link="plate" />
-    <axis
-      xyz="0 1 0" />
     <limit effort="100" velocity="100" lower="0" upper="3.1416"/>
-  </joint> -->
+  </joint>
+
+<!-- base_link and its fixed joint -->
+<joint name="joint_fix_p" type="fixed">
+  <parent link="world"/>
+  <child link="base_link_p"/>
+</joint>
+
+<link name="base_link_p">
+  <collision>
+    <origin xyz="0 1.5 0.05" rpy="0 0 0"/>
+    <geometry>
+      <box size="1 1 0.1"/>
+    </geometry>
+  </collision>
+
+  <visual>
+    <origin xyz="0 1.5 0.05" rpy="0 0 0"/>
+    <geometry>
+      <box size="1 1 0.1"/>
+    </geometry>
+  </visual>
+
+  <inertial>
+    <origin xyz="0 1.5 0.5" rpy="0 0 0"/>
+    <mass value="1"/>
+    <inertia
+      ixx="1.0" ixy="0.0" ixz="0.0"
+      iyy="1.0" iyz="0.0"
+      izz="1.0"/>
+  </inertial>
+</link>
+
+<!-- link1 and its revolute joint1 relative to base_link -->
+<!-- rotating along z axis -->
+<joint name="joint6" type="revolute">
+  <parent link="base_link_p"/>
+  <child link="link1_p"/>
+  <origin xyz="0 1.5 0.15" rpy="0 0 0"/>
+  <axis xyz="0 0 1"/>
+  <limit effort="100" velocity="100" lower="-3.1416" upper="3.1416"/>
+</joint>
+
+<link name="link1_p">
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  <geometry>
+    <cylinder length="0.1" radius="0.75"/>
+  </geometry>
+  </collision>
+
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  <geometry>
+    <cylinder length="0.1" radius="0.75"/>
+  </geometry>
+  </visual>
+
+  <inertial>
+    <origin xyz="0 0 0.05" rpy="0 0 0"/>
+    <mass value="1"/>
+    <inertia
+      ixx="1" ixy="0.0" ixz="0.0"
+      iyy="1" iyz="0.0"
+      izz="1"/>
+  </inertial>
+</link>
+
+<gazebo reference="link1_p">
+  <material>Gazebo/Grey</material>
+</gazebo>
+
+<joint name="joint_box" type="fixed">
+  <parent link="link1_p"/>
+  <child link="box"/>
+</joint>
+
+<link name="box">
+  <collision>
+    <origin xyz="0 0 0.3" rpy="0 0 0"/>
+    <geometry>
+      <box size="0.45 0.36 0.78"/>
+    </geometry>
+  </collision>
+
+  <visual>
+    <origin xyz="0 0 0.3" rpy="0 0 0"/>
+    <geometry>
+      <box size="0.45 0.36 0.78"/>
+    </geometry>
+  </visual>
+
+  <inertial>
+    <origin xyz="0 0 0.05" rpy="0 0 0"/>
+    <mass value="1"/>
+    <inertia
+      ixx="1" ixy="0.0" ixz="0.0"
+      iyy="1" iyz="0.0"
+      izz="1"/>
+  </inertial>
+</link>
+
+<gazebo reference="box">
+  <material>Gazebo/black</material>
+</gazebo>
+
 
   <gazebo reference="base_link">
     <material>Gazebo/Black</material>

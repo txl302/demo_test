@@ -29,15 +29,17 @@ void move_arm(std::vector<double> start_jnts,
 	trajectory_msgs::JointTrajectory trajectory;
 	trajectory_msgs::JointTrajectoryPoint trajectory_points;
 	// joint_names field
-	trajectory.joint_names.resize(5);
+	trajectory.joint_names.resize(7);
 	trajectory.joint_names[0] = "joint1";
 	trajectory.joint_names[1] = "joint2";
 	trajectory.joint_names[2] = "joint3";
 	trajectory.joint_names[3] = "joint4";
 	trajectory.joint_names[4] = "joint5";
+	trajectory.joint_names[5] = "joint6";
+	trajectory.joint_names[6] = "joint7";
 
 	// positions and velocities field
-	trajectory_points.positions.resize(5);
+	trajectory_points.positions.resize(7);
 
 	double fraction_of_range;
 	int time_5 = 5;
@@ -83,15 +85,17 @@ int main(int argc, char** argv) {
 	trajectory_msgs::JointTrajectory trajectory;
 	trajectory_msgs::JointTrajectoryPoint trajectory_points;
 	// joint_names field
-	trajectory.joint_names.resize(5);
+	trajectory.joint_names.resize(7);
 	trajectory.joint_names[0] = "joint1";
 	trajectory.joint_names[1] = "joint2";
 	trajectory.joint_names[2] = "joint3";
 	trajectory.joint_names[3] = "joint4";
 	trajectory.joint_names[4] = "joint5";
+	trajectory.joint_names[5] = "joint6";
+	trajectory.joint_names[6] = "joint7";
 
 	// positions and velocities field
-	trajectory_points.positions.resize(5);
+	trajectory_points.positions.resize(7);
 
 	// initialize a service client to get joint positions
 	ros::ServiceClient get_jnt_state_client = nh.serviceClient<gazebo_msgs::GetJointProperties>(
@@ -113,13 +117,13 @@ int main(int argc, char** argv) {
 	std::vector<double> safe0_jnts;
 	std::vector<double> origin0_jnts;
 	
-	safe_jnts.resize(5);
-	pos1_jnts.resize(5);
-	pos2_jnts.resize(5);
-	pos3_jnts.resize(5);
-	pos4_jnts.resize(5);
-	safe0_jnts.resize(5);
-	origin0_jnts.resize(5);
+	safe_jnts.resize(7);
+	pos1_jnts.resize(7);
+	pos2_jnts.resize(7);
+	pos3_jnts.resize(7);
+	pos4_jnts.resize(7);
+	safe0_jnts.resize(7);
+	origin0_jnts.resize(7);
 
 
 	//safe pose
@@ -181,7 +185,7 @@ int main(int argc, char** argv) {
 
 	// get the original joint positions when this node is invoked
 	std::vector<double> origin_jnts;
-	origin_jnts.resize(5);
+	origin_jnts.resize(7);
 	for (int i=0; i<5; i++) {
 		get_joint_state_srv_msg.request.joint_name = trajectory.joint_names[i];
 		get_jnt_state_client.call(get_joint_state_srv_msg);
