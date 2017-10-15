@@ -16,7 +16,7 @@
         xyz="5.43344915757781E-09 0.0443960955613356 1.50000017287721"
         rpy="0 0 0" />
       <mass
-        value="17.8923575005348" />
+        value="0.1" />
       <inertia
         ixx="0"
         ixy="0"
@@ -42,7 +42,7 @@
         xyz="1.68454688663544E-07 0.164275740780367 -0.0669943121573495"
         rpy="0 0 0" />
       <mass
-        value="19.3943177662416" />
+        value="0.1" />
       <inertia
         ixx="0"
         ixy="0"
@@ -72,6 +72,7 @@
       link="link1" />
     <axis
       xyz="0 1 0" />
+    <joint_properties damping="10.0" friction="1.0"/>  
     <limit effort="100" velocity="100" lower="-3.1416" upper="3.1416"/>
   </joint>
 
@@ -82,7 +83,7 @@
         xyz="0.0328337392440224 0.307142712467886 3.15303338993544E-14"
         rpy="0 0 0" />
       <mass
-        value="22.5828591680831" />
+        value="0.1" />
       <inertia
         ixx="0"
         ixy="0"
@@ -123,7 +124,7 @@
         xyz="0.0261839079462923 2.09127868133763E-05 -0.185012067507171"
         rpy="0 0 0" />
       <mass
-        value="13.649633544176" />
+        value="0.1" />
       <inertia
         ixx="0"
         ixy="0"
@@ -170,7 +171,7 @@
         xyz="0 0 0"
         rpy="0 0 0" />
       <mass
-        value="0.844952599159698" />
+        value="0.1" />
       <inertia
         ixx="0"
         ixy="0"
@@ -212,7 +213,7 @@
         xyz="0 -1.38777878078145E-17 -0.143700987107576"
         rpy="0 0 0" />
       <mass
-        value="3.83524054978555" />
+        value="0.1" />
       <inertia
         ixx="0"
         ixy="0"
@@ -296,21 +297,21 @@
 
 <link name="base_link_p">
   <collision>
-    <origin xyz="0 2.5 0.05" rpy="0 0 0"/>
+    <origin xyz="0 2.0 0.05" rpy="0 0 0"/>
     <geometry>
       <box size="1 1 0.1"/>
     </geometry>
   </collision>
 
   <visual>
-    <origin xyz="0 2.5 0.05" rpy="0 0 0"/>
+    <origin xyz="0 2.0 0.05" rpy="0 0 0"/>
     <geometry>
       <box size="1 1 0.1"/>
     </geometry>
   </visual>
 
   <inertial>
-    <origin xyz="0 2.5 0.5" rpy="0 0 0"/>
+    <origin xyz="0 2.0 0.5" rpy="0 0 0"/>
     <mass value="1"/>
     <inertia
       ixx="1.0" ixy="0.0" ixz="0.0"
@@ -324,7 +325,7 @@
 <joint name="joint7" type="revolute">
   <parent link="base_link_p"/>
   <child link="link1_p"/>
-  <origin xyz="0 2.5 0.15" rpy="0 0 0"/>
+  <origin xyz="0 2.0 0.15" rpy="0 0 0"/>
   <axis xyz="0 0 1"/>
   <limit effort="100" velocity="100" lower="-3.1416" upper="3.1416"/>
 </joint>
@@ -406,10 +407,10 @@
     <material>Gazebo/Red</material>
   </gazebo>
   <gazebo reference="camera">
-    <material>Gazebo/Red</material>
+    <material>Gazebo/Black</material>
   </gazebo>
   <gazebo reference="box">
-    <material>Gazebo/Red</material>
+    <material>Gazebo/Grey</material>
   </gazebo>
 
 </robot>

@@ -42,7 +42,7 @@ void move_arm(std::vector<double> start_jnts,
 	trajectory_points.positions.resize(7);
 
 	double fraction_of_range;
-	int time_5 = 5;
+	int time_5 = 1;
 
 	// prepare the goal message
 	trajectory.points.clear();
@@ -107,7 +107,7 @@ int main(int argc, char** argv) {
 	gazebo_msgs::GetModelState get_model_state_srv_msg;
 
 
-	double time_delay = 10.0; // delay between every task
+	double time_delay = 5; // delay between every task
 
 	std::vector<double> safe_jnts;
 	std::vector<double> front_jnts;
@@ -151,17 +151,17 @@ int main(int argc, char** argv) {
 	top_jnts[0] = 0; // joint1, at its origin
 	top_jnts[1] = -M_PI/8; // joint2, a little bit forward
 	top_jnts[2] = M_PI/2; // joint3, a little bit forward
-	top_jnts[3] = M_PI/2; // joint4, parallel to the ground
-	top_jnts[4] = 0;
+	top_jnts[3] = 0; // joint4, parallel to the ground
+	top_jnts[4] = M_PI/2;
 	top_jnts[5] = 0;
 	top_jnts[6] = 0;
 
 	//pos3
-	side_jnts[0] = M_PI/3; // joint1, at its origin
+	side_jnts[0] = M_PI/4; // joint1, at its origin
 	side_jnts[1] = -M_PI/4; // joint2, a little bit forward
 	side_jnts[2] = M_PI/2; // joint3, a little bit forward
-	side_jnts[3] = 0; // joint4, parallel to the ground
-	side_jnts[4] = M_PI/2;
+	side_jnts[3] = -M_PI/2; // joint4, parallel to the ground
+	side_jnts[4] = 0;
 	side_jnts[5] = 0;
 	side_jnts[6] = 0;
 
