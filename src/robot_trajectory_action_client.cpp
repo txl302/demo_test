@@ -48,7 +48,7 @@ void move_arm(std::vector<double> start_jnts,
 	trajectory.points.clear();
 	for (int i=0; i<time_5+1; i++) { // there are time_5+1 points, including start and end
 		fraction_of_range = (double)i/time_5;
-		for (int j=0; j<5; j++) { // there are 5 joints
+		for (int j=0; j<7; j++) { // there are 5 joints
 			trajectory_points.positions[j] = start_jnts[j] + (end_jnts[j] - start_jnts[j])*fraction_of_range;
 		}
 		trajectory_points.time_from_start = ros::Duration((double)i);
@@ -110,76 +110,79 @@ int main(int argc, char** argv) {
 	double time_delay = 10.0; // delay between every task
 
 	std::vector<double> safe_jnts;
-	std::vector<double> pos1_jnts;
-	std::vector<double> pos2_jnts;
-	std::vector<double> pos3_jnts;
-	std::vector<double> pos4_jnts;
-	std::vector<double> safe0_jnts;
-	std::vector<double> origin0_jnts;
+	std::vector<double> front_jnts;
+	std::vector<double> top_jnts;
+	std::vector<double> side_jnts;
+	std::vector<double> rotate_jnts;
+	std::vector<double> back_jnts;
+
 	
 	safe_jnts.resize(7);
-	pos1_jnts.resize(7);
-	pos2_jnts.resize(7);
-	pos3_jnts.resize(7);
-	pos4_jnts.resize(7);
-	safe0_jnts.resize(7);
-	origin0_jnts.resize(7);
+	front_jnts.resize(7);
+	top_jnts.resize(7);
+	side_jnts.resize(7);
+	rotate_jnts.resize(7);
+	back_jnts.resize(7);
+
+
+
 
 
 	//safe pose
-	safe_jnts[0] = M_PI/2; // joint1, at its origin
-	safe_jnts[1] = 150/180.0*M_PI; // joint2, a little bit forward
-	safe_jnts[2] = -60/180.0*M_PI; // joint3, a little bit forward
+	safe_jnts[0] = 0; // joint1, at its origin
+	safe_jnts[1] = M_PI/4; // joint2, a little bit forward
+	safe_jnts[2] = -safe_jnts[1]; // joint3, a little bit forward
 	safe_jnts[3] = 0; // joint4, parallel to the ground
 	safe_jnts[4] = 0;
+	safe_jnts[5] = 0;
+	safe_jnts[6] = 0;
 
 	//pose 1
-	pos1_jnts[0] = M_PI/4; // joint1, at its origin
-	pos1_jnts[1] = 120.0/180.0*M_PI; // joint2, a little bit forward
-	pos1_jnts[2] = -30/180.0*M_PI; // joint3, a little bit forward
-	pos1_jnts[3] = pos1_jnts[0] - M_PI; // joint4, parallel to the ground
-	pos1_jnts[4] = 0;
+	front_jnts[0] = 0; // joint1, at its origin
+	front_jnts[1] = M_PI/6; // joint2, a little bit forward
+	front_jnts[2] = -front_jnts[1]; // joint3, a little bit forward
+	front_jnts[3] = 0; // joint4, parallel to the ground
+	front_jnts[4] = 0;
+	front_jnts[5] = 0;
+	front_jnts[6] = 0;
+
 
 	//pos2
-	pos2_jnts[0] = M_PI - pos1_jnts[0]; // joint1, at its origin
-	pos2_jnts[1] = pos1_jnts[1]; // joint2, a little bit forward
-	pos2_jnts[2] = pos1_jnts[2]; // joint3, a little bit forward
-	pos2_jnts[3] = -pos1_jnts[3]; // joint4, parallel to the ground
-	pos2_jnts[4] = 0;
+	top_jnts[0] = 0; // joint1, at its origin
+	top_jnts[1] = -M_PI/8; // joint2, a little bit forward
+	top_jnts[2] = M_PI/2; // joint3, a little bit forward
+	top_jnts[3] = M_PI/2; // joint4, parallel to the ground
+	top_jnts[4] = 0;
+	top_jnts[5] = 0;
+	top_jnts[6] = 0;
 
 	//pos3
-	pos3_jnts[0] = pos2_jnts[0]; // joint1, at its origin
-	pos3_jnts[1] = pos2_jnts[1]; // joint2, a little bit forward
-	pos3_jnts[2] = pos2_jnts[2]; // joint3, a little bit forward
-	pos3_jnts[3] = pos2_jnts[3]; // joint4, parallel to the ground
-	pos3_jnts[4] = M_PI;
+	side_jnts[0] = M_PI/3; // joint1, at its origin
+	side_jnts[1] = -M_PI/4; // joint2, a little bit forward
+	side_jnts[2] = M_PI/2; // joint3, a little bit forward
+	side_jnts[3] = 0; // joint4, parallel to the ground
+	side_jnts[4] = M_PI/2;
+	side_jnts[5] = 0;
+	side_jnts[6] = 0;
 
 	//pos4
-	pos4_jnts[0] = pos1_jnts[0]; // joint1, at its origin
-	pos4_jnts[1] = pos1_jnts[1]; // joint2, a little bit forward
-	pos4_jnts[2] = pos1_jnts[2]; // joint3, a little bit forward
-	pos4_jnts[3] = pos1_jnts[3]; // joint4, parallel to the ground
-	pos4_jnts[4] = pos3_jnts[4];
+	rotate_jnts[0] = side_jnts[0]; // joint1, at its origin
+	rotate_jnts[1] = side_jnts[1]; // joint2, a little bit forward
+	rotate_jnts[2] = side_jnts[2]; // joint3, a little bit forward
+	rotate_jnts[3] = side_jnts[3]; // joint4, parallel to the ground
+	rotate_jnts[4] = side_jnts[4];
+	rotate_jnts[5] = side_jnts[5];
+	rotate_jnts[6] = M_PI;
 
 	//safe pose 0
-	safe0_jnts[0] = M_PI/2; // joint1, at its origin
-	safe0_jnts[1] = 150/180.0*M_PI; // joint2, a little bit forward
-	safe0_jnts[2] = -60/180.0*M_PI; // joint3, a little bit forward
-	safe0_jnts[3] = 0; // joint4, parallel to the ground
-	safe0_jnts[4] = pos4_jnts[4];
+	back_jnts[0] = front_jnts[0]; // joint1, at its origin
+	back_jnts[1] = front_jnts[1]; // joint2, a little bit forward
+	back_jnts[2] = front_jnts[2]; // joint3, a little bit forward
+	back_jnts[3] = front_jnts[3]; // joint4, parallel to the ground
+	back_jnts[4] = front_jnts[4];
+	back_jnts[5] = front_jnts[5];
+	back_jnts[6] = rotate_jnts[6];
 
-	//orgin0
-	origin0_jnts[0] = 0; // joint1, at its origin
-	origin0_jnts[1] = 150/180.0*M_PI; // joint2, a little bit forward
-	origin0_jnts[2] = -60/180.0*M_PI; // joint3, a little bit forward
-	origin0_jnts[3] = 0; // joint4, parallel to the ground
-	origin0_jnts[4] = 0;
-
-
-
-	///////////////////////////////////////
-	// 0.move the gripper to the safe point
-	///////////////////////////////////////
 
 	ROS_INFO("step 0: move to initial position.");
 
@@ -193,79 +196,35 @@ int main(int argc, char** argv) {
 	}
 
 	move_arm(origin_jnts, safe_jnts);
-
 	ros::Duration(time_delay).sleep(); // delay before jumping to next task
-
 	std::cin.get();
 	
-	//////////////////////////////////////
-	// 1.move to right front of the object
-	//////////////////////////////////////
-
 	ROS_INFO("step 1: move to right front of the object");
-
-	move_arm(safe_jnts, pos1_jnts);
-
+	move_arm(safe_jnts, front_jnts);
 	ros::Duration(time_delay).sleep(); // delay before jumping to next task
-
 	std::cin.get();
 
-	//////////////////////////////////////
-	// 2.move to left front of the object
-	//////////////////////////////////////
-
-	ROS_INFO("step 2: move to left front of the object");
-
-	move_arm(pos1_jnts, pos2_jnts);
-
+	ROS_INFO("step 2: move to top of the object");
+	move_arm(front_jnts, top_jnts);
 	ros::Duration(time_delay).sleep(); // delay before jumping to next task
-
 	std::cin.get();
 
-	//////////////////////////////////////
-	// 3.rotate the platform
-	//////////////////////////////////////
-
-	ROS_INFO("step 3: rotate the platform");
-
-	move_arm(pos2_jnts, pos3_jnts);
-
+	ROS_INFO("step 3: move to the side of the object");
+	move_arm(top_jnts, side_jnts);
 	ros::Duration(time_delay).sleep(); // delay before jumping to next task
-
 	std::cin.get();
 
-	//////////////////////////////////////
-	// 4.move back to right front of the object
-	//////////////////////////////////////
-
-	ROS_INFO("step 4: move back to the right front of the object");
-
-	move_arm(pos3_jnts, pos4_jnts);
-
+	ROS_INFO("step 4: rotate the platform");
+	move_arm(side_jnts, rotate_jnts);
 	ros::Duration(time_delay).sleep(); // delay before jumping to next task
-
 	std::cin.get();
 
-	//////////////////////////////////////
-	// 5.move back to the safe pose
-	//////////////////////////////////////
-
-	ROS_INFO("step 5: move back to the safe pose");
-
-	move_arm(pos4_jnts, safe0_jnts);
-
+	ROS_INFO("step 5: move back to front of object");
+	move_arm(rotate_jnts, back_jnts);
 	ros::Duration(time_delay).sleep(); // delay before jumping to next task
-
-	/////////////////////////////////////////////
-	// 6.move back to the signed original pose
-	/////////////////////////////////////////////
 
 	ROS_INFO("step 6: move back to the safe position.");
-
-	// assign the start joints and end joints
-
-	move_arm(safe0_jnts, origin0_jnts);
-
+	move_arm(back_jnts, safe_jnts);
 	ros::Duration(time_delay).sleep(); // delay before jumping to next task
 
 	ROS_INFO("Task is finished! Thank you for watching");

@@ -186,8 +186,8 @@ int main(int argc, char **argv) {
 	Joint joint1(nh, "joint1", dt);
 	Joint joint2(nh, "joint2", dt);
 	Joint joint3(nh, "joint3", dt);
-	Joint joint4(nh, "joint4", dt);
-	Joint joint5(nh, "joint5", dt);
+	Joint joint4(nh, "joint5", dt);
+	Joint joint5(nh, "joint4", dt);
 	Joint joint6(nh, "joint6", dt);
 	Joint joint7(nh, "joint7", dt);
 

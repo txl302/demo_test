@@ -72,7 +72,7 @@
       link="link1" />
     <axis
       xyz="0 1 0" />
-    <limit effort="100" velocity="100" lower="0" upper="3.1416"/>
+    <limit effort="100" velocity="100" lower="-3.1416" upper="3.1416"/>
   </joint>
 
   <link
@@ -114,7 +114,7 @@
       link="link2" />
     <axis
       xyz="1 0 0" />
-    <limit effort="100" velocity="100" lower="0" upper="3.1416"/>
+    <limit effort="100" velocity="100" lower="-3.1416" upper="3.1416"/>
   </joint>
 
   <link name="link3">
@@ -160,7 +160,7 @@
       link="link3" />
     <axis
       xyz="1 0 0" />
-    <limit effort="100" velocity="100" lower="0" upper="3.1416"/>
+    <limit effort="100" velocity="100" lower="-3.1416" upper="3.1416"/>
   </joint>
 
   <link
@@ -191,8 +191,8 @@
   </link>
 
   <joint
-    name="joint5"
-    type="continuous">
+    name="joint4"
+    type="revolute">
     <origin
       xyz="0.0483407685108505 0 -0.693420367397096"
       rpy="0 0 0" />
@@ -202,6 +202,7 @@
       link="link5" />
     <axis
       xyz="0 1 0" />
+    <limit effort="100" velocity="100" lower="-3.1416" upper="3.1416"/>
   </joint>
 
   <link
@@ -232,7 +233,7 @@
   </link>
 
   <joint
-    name="joint4"
+    name="joint5"
     type="revolute">
     <origin
       xyz="0 0 0"
@@ -243,7 +244,7 @@
       link="link4" />
     <axis
       xyz="-1 0 0" />
-    <limit effort="100" velocity="100" lower="0" upper="3.1416"/>
+    <limit effort="100" velocity="100" lower="-3.1416" upper="3.1416"/>
   </joint>
 
   <link name="camera">
@@ -273,7 +274,7 @@
   </link>
 
   <joint
-    name="joint_camera"
+    name="joint6"
     type="revolute">
     <origin
       xyz="0 0 -0.18"
@@ -284,7 +285,7 @@
       link="camera" />
     <axis
       xyz="0 0 0" />
-    <limit effort="100" velocity="100" lower="0" upper="3.1416"/>
+    <limit effort="100" velocity="100" lower="-3.1416" upper="3.1416"/>
   </joint>
 
 <!-- base_link and its fixed joint -->
@@ -295,21 +296,21 @@
 
 <link name="base_link_p">
   <collision>
-    <origin xyz="0 1.5 0.05" rpy="0 0 0"/>
+    <origin xyz="0 2.5 0.05" rpy="0 0 0"/>
     <geometry>
       <box size="1 1 0.1"/>
     </geometry>
   </collision>
 
   <visual>
-    <origin xyz="0 1.5 0.05" rpy="0 0 0"/>
+    <origin xyz="0 2.5 0.05" rpy="0 0 0"/>
     <geometry>
       <box size="1 1 0.1"/>
     </geometry>
   </visual>
 
   <inertial>
-    <origin xyz="0 1.5 0.5" rpy="0 0 0"/>
+    <origin xyz="0 2.5 0.5" rpy="0 0 0"/>
     <mass value="1"/>
     <inertia
       ixx="1.0" ixy="0.0" ixz="0.0"
@@ -320,10 +321,10 @@
 
 <!-- link1 and its revolute joint1 relative to base_link -->
 <!-- rotating along z axis -->
-<joint name="joint6" type="revolute">
+<joint name="joint7" type="revolute">
   <parent link="base_link_p"/>
   <child link="link1_p"/>
-  <origin xyz="0 1.5 0.15" rpy="0 0 0"/>
+  <origin xyz="0 2.5 0.15" rpy="0 0 0"/>
   <axis xyz="0 0 1"/>
   <limit effort="100" velocity="100" lower="-3.1416" upper="3.1416"/>
 </joint>
@@ -366,14 +367,16 @@
   <collision>
     <origin xyz="0 0 0.3" rpy="0 0 0"/>
     <geometry>
-      <box size="0.45 0.36 0.78"/>
+      <mesh
+          filename="package://demo_test/meshes/frig.STL" />
     </geometry>
   </collision>
 
   <visual>
-    <origin xyz="0 0 0.3" rpy="0 0 0"/>
+    <origin xyz="0 0 0" rpy="1.5708 0 0"/>
     <geometry>
-      <box size="0.45 0.36 0.78"/>
+      <mesh
+          filename="package://demo_test/meshes/frig.STL" />
     </geometry>
   </visual>
 
@@ -386,11 +389,6 @@
       izz="1"/>
   </inertial>
 </link>
-
-<gazebo reference="box">
-  <material>Gazebo/black</material>
-</gazebo>
-
 
   <gazebo reference="base_link">
     <material>Gazebo/Black</material>
@@ -405,6 +403,12 @@
     <material>Gazebo/Orange</material>
   </gazebo>
   <gazebo reference="link4">
+    <material>Gazebo/Red</material>
+  </gazebo>
+  <gazebo reference="camera">
+    <material>Gazebo/Red</material>
+  </gazebo>
+  <gazebo reference="box">
     <material>Gazebo/Red</material>
   </gazebo>
 
