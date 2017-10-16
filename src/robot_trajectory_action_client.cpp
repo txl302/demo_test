@@ -42,7 +42,7 @@ void move_arm(std::vector<double> start_jnts,
 	trajectory_points.positions.resize(7);
 
 	double fraction_of_range;
-	int time_5 = 2;
+	int time_5 = 2.5;
 
 	// prepare the goal message
 	trajectory.points.clear();
@@ -150,16 +150,16 @@ int main(int argc, char** argv) {
 	//pos2
 	top_jnts[0] = 0; // joint1, at its origin
 	top_jnts[1] = -M_PI/8; // joint2, a little bit forward
-	top_jnts[2] = M_PI/2; // joint3, a little bit forward
+	top_jnts[2] = 4*M_PI/9; // joint3, a little bit forward
 	top_jnts[3] = 0; // joint4, parallel to the ground
-	top_jnts[4] = M_PI/2;
+	top_jnts[4] = 4*M_PI/9;
 	top_jnts[5] = 0;
 	top_jnts[6] = 0;
 
 	//pos3
 	side_jnts[0] = M_PI/3; // joint1, at its origin
 	side_jnts[1] = -M_PI/4; // joint2, a little bit forward
-	side_jnts[2] = M_PI/2; // joint3, a little bit forward
+	side_jnts[2] = 4*M_PI/9; // joint3, a little bit forward
 	side_jnts[3] = -M_PI/2; // joint4, parallel to the ground
 	side_jnts[4] = 0;
 	side_jnts[5] = 0;
