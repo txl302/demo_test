@@ -42,7 +42,7 @@ void move_arm(std::vector<double> start_jnts,
 	trajectory_points.positions.resize(7);
 
 	double fraction_of_range;
-	int time_5 = 1;
+	int time_5 = 2;
 
 	// prepare the goal message
 	trajectory.points.clear();
@@ -107,7 +107,7 @@ int main(int argc, char** argv) {
 	gazebo_msgs::GetModelState get_model_state_srv_msg;
 
 
-	double time_delay = 5; // delay between every task
+	double time_delay = 6; // delay between every task
 
 	std::vector<double> safe_jnts;
 	std::vector<double> front_jnts;
@@ -157,7 +157,7 @@ int main(int argc, char** argv) {
 	top_jnts[6] = 0;
 
 	//pos3
-	side_jnts[0] = M_PI/4; // joint1, at its origin
+	side_jnts[0] = M_PI/3; // joint1, at its origin
 	side_jnts[1] = -M_PI/4; // joint2, a little bit forward
 	side_jnts[2] = M_PI/2; // joint3, a little bit forward
 	side_jnts[3] = -M_PI/2; // joint4, parallel to the ground
@@ -197,27 +197,27 @@ int main(int argc, char** argv) {
 
 	move_arm(origin_jnts, safe_jnts);
 	ros::Duration(time_delay).sleep(); // delay before jumping to next task
-	std::cin.get();
+	//std::cin.get();
 	
 	ROS_INFO("step 1: move to right front of the object");
 	move_arm(safe_jnts, front_jnts);
 	ros::Duration(time_delay).sleep(); // delay before jumping to next task
-	std::cin.get();
+	//std::cin.get();
 
 	ROS_INFO("step 2: move to top of the object");
 	move_arm(front_jnts, top_jnts);
 	ros::Duration(time_delay).sleep(); // delay before jumping to next task
-	std::cin.get();
+	//std::cin.get();
 
 	ROS_INFO("step 3: move to the side of the object");
 	move_arm(top_jnts, side_jnts);
 	ros::Duration(time_delay).sleep(); // delay before jumping to next task
-	std::cin.get();
+	//std::cin.get();
 
 	ROS_INFO("step 4: rotate the platform");
 	move_arm(side_jnts, rotate_jnts);
 	ros::Duration(time_delay).sleep(); // delay before jumping to next task
-	std::cin.get();
+	//std::cin.get();
 
 	ROS_INFO("step 5: move back to front of object");
 	move_arm(rotate_jnts, back_jnts);

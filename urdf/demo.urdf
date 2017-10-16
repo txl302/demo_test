@@ -72,7 +72,7 @@
       link="link1" />
     <axis
       xyz="0 1 0" />
-    <joint_properties damping="10.0" friction="1.0"/>  
+    <joint_properties damping="30.0" friction="20.0"/>  
     <limit effort="100" velocity="100" lower="-3.1416" upper="3.1416"/>
   </joint>
 
@@ -83,7 +83,7 @@
         xyz="0.0328337392440224 0.307142712467886 3.15303338993544E-14"
         rpy="0 0 0" />
       <mass
-        value="0.1" />
+        value="5" />
       <inertia
         ixx="0"
         ixy="0"
@@ -115,6 +115,7 @@
       link="link2" />
     <axis
       xyz="1 0 0" />
+      <joint_properties damping="200.0" friction="150.0"/> 
     <limit effort="100" velocity="100" lower="-3.1416" upper="3.1416"/>
   </joint>
 
@@ -161,6 +162,7 @@
       link="link3" />
     <axis
       xyz="1 0 0" />
+      <joint_properties damping="20.0" friction="15.0"/> 
     <limit effort="100" velocity="100" lower="-3.1416" upper="3.1416"/>
   </joint>
 
@@ -171,7 +173,7 @@
         xyz="0 0 0"
         rpy="0 0 0" />
       <mass
-        value="0.1" />
+        value="0.01" />
       <inertia
         ixx="0"
         ixy="0"
@@ -203,6 +205,7 @@
       link="link5" />
     <axis
       xyz="0 1 0" />
+      <joint_properties damping="20.0" friction="15.0"/> 
     <limit effort="100" velocity="100" lower="-3.1416" upper="3.1416"/>
   </joint>
 
@@ -213,7 +216,7 @@
         xyz="0 -1.38777878078145E-17 -0.143700987107576"
         rpy="0 0 0" />
       <mass
-        value="0.1" />
+        value="0.001" />
       <inertia
         ixx="0"
         ixy="0"
@@ -245,6 +248,7 @@
       link="link4" />
     <axis
       xyz="-1 0 0" />
+      <joint_properties damping="20.0" friction="15.0"/> 
     <limit effort="100" velocity="100" lower="-3.1416" upper="3.1416"/>
   </joint>
 
@@ -254,7 +258,7 @@
         xyz="0 2.22044604925031E-16 -0.0681881207360688"
         rpy="0 0 0" />
       <mass
-        value="0.430020999525805" />
+        value="0.001" />
       <inertia
         ixx="0"
         ixy="0"
